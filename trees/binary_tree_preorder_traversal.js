@@ -33,14 +33,16 @@ Output: [1,2,3]
 };*/
 
 var preorderTraversal = function(root) {
-   if(!root) return [];
-   let queue=[root],result=[];
-   while(queue.length){
-      let first=queue.shift();
-      result.push(first.val);
-      if(first.left) queue.push(first.left);
-      if(first.right) queue.push(first.right);
-   }
-   return result;
+    if(!root) return [];
+    let stack=[root],result=[];
+    while(stack.length) {
+        let node=stack.pop();
+        if(node){
+            result.push(node.val);
+            if(node.right) stack.push(node.right);
+            if(node.left) stack.push(node.left);
+        }
+    }
+    return result;
     
 };
