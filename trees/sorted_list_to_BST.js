@@ -56,3 +56,28 @@ var sortedListToBST = function(head) {
     }
     return listToTree(0,values.length-1);
 };
+///////////////////Solution without converting list to array///////////////////////////////////
+const getListLength=head=>{
+    let counter=0,ptr=head;
+    while(ptr){
+        counter=counter+1;
+        ptr=ptr.next;
+    }
+    return counter;
+}
+
+var sortedListToBST = function(head) {
+    const listToTree=(l,r)=>{
+        if(l<=r) {
+            let middle=Math.floor((l+r)/2);
+            let left=listToTree(l,middle-1);
+            let root=new TreeNode(head.val);
+            root.left=left;
+            head=head.next;
+            root.right=listToTree(middle+1,r);
+            return root;
+        }
+        else return null;
+   };
+    return listToTree(0,getListLength(head)-1);
+};
