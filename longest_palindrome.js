@@ -30,3 +30,19 @@ var longestPalindrome = function(s) {
     });
     return s.slice(start,start+max_length);
 };
+
+/**********************************************/
+var longestPalindrome = function(s) {
+    let map={};
+    for(let i=0;i<s.length;i++) {
+        if(map[s[i]]) map[s[i]]+=1;
+        else map[s[i]]=1;
+    }
+    let count=0, hasOdd=false;
+    for(let key in map) {
+        if(map[key]%2===0) count+=map[key];
+        else count+=map[key]-1;
+        if(map[key]%2!==0) hasOdd=true;
+    }
+    return hasOdd?count+1:count;
+};
